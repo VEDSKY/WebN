@@ -1,13 +1,13 @@
 import os
 import unittest
-from WebN.Config import Config as WebN
+from WebN.Config import get_env_key as WebN
 
 from WebN.Sources.newsapi.newsapi_client import NewsApiClient
 
 
 class NewsApiClientTest(unittest.TestCase):
     def setUp(self):
-        self.api = NewsApiClient(WebN('GOOGLE_NEWS_API_KEY'))
+        self.api = NewsApiClient(str(WebN('GOOGLE_NEWS_API_KEY')))
 
     def test_api_top_headline(self):
         # Raise TypeError if Keyword/Phrase param is not of type str

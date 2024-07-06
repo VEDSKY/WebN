@@ -1,37 +1,39 @@
 import os
+
+import WebN.Utils
+from WebN.Utils import *
+
 from dotenv import load_dotenv
 
+dotenv_loaded = False
+dotenv_path = f'{ROOT_DIR}/.env'
 
-class Config:
-    def __init__(self, environment_key):
-        # Initialise variables.
-        self.environment_key = environment_key
-        self.dotenv_path = os.path.join('.env')
-        self.dotenv_loaded = False
-        self._initialize()
 
-    def _initialize(self):
-        self._load_environment()
-        self._get_env_key()
+def load_dotenv_file(path):
+    global dotenv_loaded
+    if os.path.exists(path):
+        load_dotenv(dotenv_path)
+        dotenv_loaded = True
+        print('[Info][Environment][.env Ready!]')
+    else:
+        print(f'[Error][File Error][Environment][File .env not found in path {path}]')
+        dotenv_loaded = False
 
-    # This function
-    def _load_environment(self):
+
+def get_env_key(environment_key):
+    global dotenv_loaded
+    if dotenv_loaded:
         try:
-            load_dotenv(self.dotenv_path)
-            self.dotenv_loaded = True
-            print('[Info][Environment][Environment loaded successfully!]')
-        except EnvironmentError as e:
-            print(f'[Error][Environment][{e}]')
-            self.dotenv_loaded = False
-        pass
-
-    # This function returns value from .env. by key.
-    def _get_env_key(self):
-        if self.dotenv_loaded:
-            ret_val = os.getenv(self.environment_key)
-            print(f'Returning environment value by key {self.environment_key}')
-            print(f'Returned: {ret_val}')
+            ret_val = os.getenv(environment_key)
+            print(f'Returning environment value by key {environment_key}')
+            print(f'The variable was transferred successfully.')
             return ret_val
-        else:
+        except EnvironmentError as e:
             print('[Error][Environment][Environment is not loaded! Cannot return a value!]')
             return None
+    else:
+        print('[Error][Environment][Environment is not loaded! Cannot return a value!]')
+        return None
+
+
+load_dotenv_file(dotenv_path)

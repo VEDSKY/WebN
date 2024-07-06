@@ -1,4 +1,4 @@
-from WebN.Config import Config as WebN
+from WebN.Config import get_env_key as WebN
 
 """Constants and allowed parameter values specified in the News API."""
 TOP_HEADLINES_URL = WebN('TOP_HEADLINES_URL')
