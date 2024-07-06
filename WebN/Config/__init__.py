@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 
 class Config:
     def __init__(self, environment_key):
+        # Initialise variables.
         self.environment_key = environment_key
         self.dotenv_path = os.path.join('.env')
         self.dotenv_loaded = False
@@ -13,6 +14,7 @@ class Config:
         self._load_environment()
         self._get_env_key()
 
+    # This function
     def _load_environment(self):
         try:
             load_dotenv(self.dotenv_path)
@@ -23,6 +25,7 @@ class Config:
             self.dotenv_loaded = False
         pass
 
+    # This function returns value from .env. by key.
     def _get_env_key(self):
         if self.dotenv_loaded:
             ret_val = os.getenv(self.environment_key)
