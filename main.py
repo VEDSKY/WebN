@@ -1,6 +1,8 @@
-from WebN.Config import get_env_key as WebN
+from WebN import start
 
 try:
-    print(f"Welcome to {WebN('APP_NAME')}")
+    start()
 except Exception as e:
-    print(f'[Error][WebN][Error launching application! Error: {e}]')
+    print('Error When loading application! Try again later!')
+    print(f'Error info: {e}')
+    exit(0)
