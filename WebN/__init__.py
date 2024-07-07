@@ -1,6 +1,7 @@
 import os
 from WebN.Config import get_env_key as WebN
 from WebN.Sources import *
+from WebN.Ui.FletUi import set_up_screen
 
 
 def start():
@@ -15,3 +16,4 @@ def start():
               f"{article['urlToImage']}\n"
               f"{article['publishedAt']}\n"
               f"{article['content']}\n")
+    set_up_screen(news)
