@@ -25,5 +25,14 @@ def google_get_top_headlines(sources=None):
         return None
 
 
+def search(query):
+    search_json = json.dumps(google_news.get_everything(q=query))
+    search_list = json.loads(search_json)
+    if search_list['status'] == 'ok':
+        return search_list['articles']
+    else:
+        return None
+
+
 def google_get_random_source():
     source = random.choice(google_news.get_sources())
